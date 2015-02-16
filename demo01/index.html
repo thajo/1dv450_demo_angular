@@ -1,16 +1,55 @@
 <!DOCTYPE html>
- <html>
+
+<!-- data-ng-app (data-* is for HTML5 validation) is a directive to auto-bootstrap an angular application -->
+<!-- You can get this scope in an own file e.g. main|app.js -->
+ <html data-ng-app="demoApp">
    <head>
      <title>AngularJS</title>
        <!-- Latest compiled and minified CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
+    
+     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script> 
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
    </head>
    <body>
      
      <h1>Hello AngularJS!</h1>
+     
+       <!-- This is a controller - It's scope is in the div-tag -->
+       <div data-ng-controller="demoController">
+       
+       <!-- data-ng-model sets a property which is databinded in the  script -->
+       <input type="text" data-ng-model="name" />
+       
+       <!-- Declarative call to the scopes method -->
+       <button value="Message" data-ng-click="alertMessage('Your name is: ' +name);" />
+       <h2>Hello {{ name }}!!</h2>
+     
+     </div> 
+     
+     
+     <!-- Ofcourse this should have its own file -->
+     <script>
+       
+        // This is a demoApp 
+        var myApp = angular.module('demoApp',[]);
+
+       // Add the controller (get demoController), dependency injection with scop and window 
+        myApp.controller('demoController', ['$scope', '$window', function($scope, $win) {
+          
+          // Databind (see data-ng-model above)
+          $scope.name = "World";
+          
+          // A controller method
+          $scope.alertMessage = function(message) {
+            // Alert on the window-object
+            $win.alert(message)
+          };
+          
+        }]);
+     </script>
      
    </body>
 </html>
