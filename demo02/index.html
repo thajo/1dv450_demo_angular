@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<!-- data-ng-app (data-* is for HTML5 validation) is a directive to auto-bootstrap an angular application -->
+<!-- You can get this scope in an own file e.g. main|app.js -->
+ <html data-ng-app="demo2App">
+   <head>
+     <base href="/demo02/">
+     <title>AngularJS</title>
+       <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+      
+    
+   </head>
+   <body>
+     
+     <h1 class="jumbotrone">Hello AngularJS - Demo2!</h1>
+     <hr />
+     <div ng-controller="PlayersController as players">
+       <input data-ng-model="players.idvalue"  />
+       <button data-ng-click="players.getPlayer()">Get Player</button>
+       
+       <hr />
+       
+       <ul>
+         <li>Name: {{ players.currentPlayer.name }}</li>
+         <li>Age: {{ players.currentPlayer.age }}</li>
+       </ul>
+     </div>
+       
+       <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script> 
+       <!-- Latest compiled and minified JavaScript -->
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.js"></script>
+     
+       <script src="app.js"></script>
+       <script src="controllers/PlayersController.js"></script> 
+     
+   </body>
+</html>
