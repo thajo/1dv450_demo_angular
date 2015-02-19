@@ -1,7 +1,7 @@
 // This should hold a list with all players
 angular
-.module("demo3App")
-.factory('PlayerService', PlayerService); // register the recipe for teh service
+  .module("demo4App")
+  .factory('PlayerService', PlayerService); // register the recipe for teh service
 
 
   // Here is the definition of teh service
@@ -16,30 +16,6 @@ angular
     ];
   
   
-    var obj = {}; // create empty object
-    
-    // declare funtions on it
-    obj.get = function() {
-      return playerList;    
-    };
-    
-    
-    obj.getPlayer = function(id) {
-      // here we should ask the API for a specific player
-        var result = playerList.filter(function(p) {
-           return p.id.toString() === id.toString(); // filter out appropriate one
-        })[0]; // get result and access foo property
-
-        return result;
-    };
-    
-    // return the object
-    return obj;
-    
-    
-    
-    
-    /*
     return {
       get:function() {
         return playerList;     
@@ -50,10 +26,10 @@ angular
         // here we should ask the API for a specific player
         var result = playerList.filter(function(p) {
            return p.id.toString() === id.toString(); // filter out appropriate one
-        })[0]; // get result and access foo property
+        })[0]; // get result and access the first (should be the only in this case) element
 
         return result;
-      }*/
+      }
     
-    //};
+    };
   }
