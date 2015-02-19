@@ -20,7 +20,7 @@
      
        <!-- This is a controller - It's scope is in the div-tag -->
        <!-- Uning the ControllerAs-thing make nice namespacing -->
-       <div data-ng-controller="DemoController as person">
+     <div data-ng-controller="DemoController as person">
        
        <!-- data-ng-model sets a property which is databinded in the  script -->
        <input type="text" data-ng-model="person.name" />
@@ -34,6 +34,10 @@
      
      <!-- Ofcourse this should have its own file -->
      <script>
+       
+       /**
+       INSPIRED BY: https://github.com/johnpapa/angularjs-styleguide
+       */
        
         // This is a demoApp 
         var myApp = angular.module('demoApp',[]);
@@ -56,7 +60,7 @@
           
           // A controller method
           vm.alertMessage = function(message) {
-
+            // Here will this not point at the scope
             // Alert on the window-object
             $win.alert(message)
           };

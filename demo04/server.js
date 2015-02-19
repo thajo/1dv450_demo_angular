@@ -6,6 +6,7 @@ var app = express();
  // app.use('/assets', express.static('/assets'));
 
   app.use('/app', express.static(__dirname +'/app'));
+//app.use('/partials', express.static(__dirname +'/app/partials'));
 //app.use('/services', express.static(__dirname +'/services'));
 //app.use('/partials', express.static(__dirname +'/'));
 
@@ -18,7 +19,7 @@ var app = express();
   // This route deals enables HTML5Mode by forwarding missing files to the index.html
  app.get('/*', function(req, res) {
     console.log(req.url)
-    res.sendFile(__dirname + '/index.html');
+    //res.sendFile(__dirname + '/index.html');
   });
 
 

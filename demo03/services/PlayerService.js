@@ -16,6 +16,30 @@ angular
     ];
   
   
+    var obj = {}; // create empty object
+    
+    // declare funtions on it
+    obj.get = function() {
+      return playerList;    
+    };
+    
+    
+    obj.getPlayer = function(id) {
+      // here we should ask the API for a specific player
+        var result = playerList.filter(function(p) {
+           return p.id.toString() === id.toString(); // filter out appropriate one
+        })[0]; // get result and access foo property
+
+        return result;
+    };
+    
+    // return the object
+    return obj;
+    
+    
+    
+    
+    /*
     return {
       get:function() {
         return playerList;     
@@ -29,7 +53,7 @@ angular
         })[0]; // get result and access foo property
 
         return result;
-      }
+      }*/
     
-    };
+    //};
   }

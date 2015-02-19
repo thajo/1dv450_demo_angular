@@ -10,35 +10,32 @@
       <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script> 
       
      <!-- Latest compiled and minified JavaScript -->
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
    
     </head>
    <body>
      
      <h1 class="jumbotron">First demo AngularJS!</h1>
-     
-  
-     
-       <!-- This is a controller - It's scope is in the div-tag -->
-       <!-- Uning the ControllerAs-thing make nice namespacing -->
+      <!-- This is a controller - It's scope is in the div-tag -->
+      <!-- Uning the ControllerAs-thing make nice namespacing -->
        <div class="container" data-ng-controller="DemoController">
        
-       <!-- data-ng-model sets a property which is databinded in the  script -->
-       <input type="text" data-ng-model="name" />
-       
-       <!-- Declarative call to the scopes method -->
-       <button data-ng-click="alertMessage(name);">Update Properties</button>
-       <h2>Hello {{ name }}!!</h2>
-        
-         <h3>You are:</h3>  
-       <ul>
-         <li data-ng-repeat="prop in properties">
-           {{ prop }}
-         </li>
-       </ul> 
-     
-     </div> 
+         <!-- data-ng-model sets a property which is databinded in the  script -->
+         <input type="text" data-ng-model="name" />
+
+         <!-- Declarative call to the scopes method -->
+         <button data-ng-click="alertMessage(name);">Update Properties</button>
+         <h2>Hello {{ name }}!!</h2>
+
+           <h3>You are:</h3>  
+         <ul>
+           <li data-ng-repeat="prop in properties">
+             {{ prop }}
+           </li>
+         </ul> 
+
+       </div> 
      
      
      <!-- Ofcourse this should have its own file -->
