@@ -1,5 +1,5 @@
 angular
-  .module("demo4App", ['ngRoute']) // you must inject the ngRoute (included as a separate js-file)
+  .module("demo5App", ['ngRoute', 'LocalStorageModule']) // you must inject the ngRoute (included as a separate js-file)
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider.
@@ -26,4 +26,20 @@ angular
         enabled: true,
         requireBase: true
       });
-    }]);
+    }])
+    .config(function (localStorageServiceProvider) {
+      localStorageServiceProvider
+          .setPrefix('demo5app')
+          .setStorageType('sessionStorage')
+          .setNotify(true, true)
+    })
+    .constant('API', {
+      'key': "sdkjalsdjlasjdlkajsdljs",
+      'url': "http://localhost:3000/"
+    })
+    .constant('LocalStorageConstants', {
+      'playersKey' : 'p'
+    });
+
+
+;

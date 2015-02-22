@@ -1,0 +1,18 @@
+
+<div data-ng-if="player.message">
+  <h1>{{player.message}}</h1>
+</div>
+
+<div data-ng-if="!player.message">
+  <h1>Information about the player</h1>
+
+
+  <p>
+    <!-- Using player when I have set the controllerAs in the app.js and routeProvider -->
+    Name: {{ player.name }}
+  </p>
+  <p>
+    Age: {{ player.age}}
+  </p>
+</div>
+
