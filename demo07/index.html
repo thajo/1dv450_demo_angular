@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<!-- data-ng-app (data-* is for HTML5 validation) is a directive to auto-bootstrap an angular application -->
+<!-- You can get this scope in an own file e.g. main|app.js -->
+ <html data-ng-app="demo5App">
+   <head>
+    <base href="/demo05">
+     <title>AngularJS</title>
+       <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+      
+     
+    
+   </head>
+   <body>
+     
+     <h1 class="jumbotrone">Hello AngularJS - Demo4!</h1>
+     <hr />
+     <!-- Includes a shared view (menu) -->
+     <div data-ng-include src="'partials/shared/menu.html'"> Should be replaced?</div>
+     <hr />
+     
+     <!-- This part will be replaced by diffrent views specified in the app.js -->
+     <div data-ng-view>This should be replaced</div>
+      
+       
+     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+     <!-- Latest compiled and minified JavaScript -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.js"></script>
+     <script src="libs/angular-localstorage.js"></script>
+
+     <script src="app.js"></script>
+     <script src="services/PlayerService.js"></script>
+      <script src="services/ResourceService.js"></script>
+     <script src="services/PlayerResource.js"></script>
+    
+     <script src="controllers/PlayerDetailCtrl.js"></script>
+     <script src="controllers/PlayerListCtrl.js"></script>
+      
+     
+   </body>
+</html>

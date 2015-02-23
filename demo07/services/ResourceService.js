@@ -1,0 +1,112 @@
+/**
+This is responsible of the calls to the API
+*/
+
+angular
+    .module("demo5App")
+    .factory('ResourceService', ResourceService); // register the recipe for the service
+
+
+// We inject the http (for AJAX-handling) and the API
+//PlayerResource.$inject = ['$http', 'API'];
+
+
+function ResourceService($http, API) {
+  
+ return function (collectionName) {
+    var Resource = function(data) {
+      // Configuerar objectet enligt den data som kommer in - Allt är json
+      angular.extend(this, data);
+    }
+  
+    var o = {};
+    // Get all players from the API
+    Resource.getAll = function() {
+        var req = {
+            method: 'GET',
+            url: API.url +collectionName, // this is the entry point in my example
+            headers: {
+                'Accept': API.format,
+                'X-APIKEY': API.key
+            },
+            params: {
+                'limit': '500'
+            }
+        };
+        // This returns a promise which will be fullfilled when the response is back
+        return $http(req).then(function(response) {
+          var result = [];
+          angular.forEach(response.data, function(value, key) {
+            result[key] = new Resource(value); 
+          });
+          // This is return when we get data
+          return result;
+        });
+    };
+
+    // Get a instance resource (take an object,if we have it, as parameter. Otherwise item is an id (Breaking HATEOAS))
+    /*
+      ressourceInfo = {
+        'instanceName' : 'player'
+        'id' : 12
+        'url' : ...
+      }
+      
+      
+    */
+  
+    Resource.getSingle = function(resourceInfo) {
+
+        var url;
+        console.log(resourceInfo);
+        // are we using the url provided by the call
+        if(resourceInfo.hasOwnProperty('url')) {
+            url = resourceInfo.url;
+        }
+        else if(resourceInfo.hasOwnProperty('instanceName') && resourceInfo.hasOwnProperty('id')) { // or we using a fall back (item => is an id)
+            url = API.url +resourceInfo.instanceName +"/" +resourceInfo.id
+        }
+        else {
+          return false;
+        }
+      console.log("Calling: " +url);
+        var req = {
+            method: 'GET',
+            url: url,
+            headers: {
+                'Accept': API.format,
+                'X-APIKEY': API.key
+            },
+            params: {
+                'limit': '500'
+            }
+        };
+
+      return $http(req).success(function(response) {
+        
+        return response;
+      });
+    };
+
+    Resource.save = function(collectionName, data) {
+        var req = {
+            method: 'POST',
+            url: API.url +collectionName, // this is the entry point in my example
+            headers: {
+                'Accept': API.format,
+                'X-APIKEY': API.key
+            },
+            params: {
+                'limit': '500'
+            },
+          data : data
+        };
+        return $http(req).then(function(response){
+          return new Resource(data);
+        });
+    };
+
+    return Resource;
+ }
+
+};

@@ -19,11 +19,6 @@ angular
         otherwise({
           redirectTo: '/'
         });
-      
-      //$locationProvider.html5Mode(true); // This removes the hash-bang and use the Session history management >= IE10
+      $locationProvider.html5Mode(true); // This removes the hash-bang and use the Session history management >= IE10
 
-      $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: true
-      });
     }]);

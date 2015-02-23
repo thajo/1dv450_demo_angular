@@ -35,7 +35,8 @@ angular
     })
     .constant('API', {
       'key': "sdkjalsdjlasjdlkajsdljs",
-      'url': "http://localhost:3000/"
+      'url': "http://blue-white-harbor-95-185765.euw1-2.nitrousbox.com/",
+      'format': 'application/json'
     })
     .constant('LocalStorageConstants', {
       'playersKey' : 'p'

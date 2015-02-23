@@ -1,20 +1,23 @@
+/**
+This is responsible of the calls to the API
+*/
+
 angular
     .module("demo5App")
     .factory('PlayerResource', PlayerResource); // register the recipe for the service
 
 
-
+// We inject the http (for AJAX-handling) and the API
 PlayerResource.$inject = ['$http', 'API'];
 
 
 function PlayerResource($http, API) {
-
     var o = {};
-
+    // Get all players from the API
     o.getAll = function() {
         var req = {
             method: 'GET',
-            url: API.url +"/players",
+            url: API.url +"/players", // this is the entry point in my example
             headers: {
                 'Accept': 'application/json',
                 'X-APIKEY': API.key
@@ -23,11 +26,11 @@ function PlayerResource($http, API) {
                 'limit': '500'
             }
         };
-
+        // This returns a promise which will be fullfilled when the response is back
         return $http(req);
-
     };
 
+    // Get a instance resource (take an object,if we have it, as parameter. Otherwise item is an id (Breaking HATEOAS))
     o.getSingle = function(item) {
 
         var url;
@@ -39,8 +42,6 @@ function PlayerResource($http, API) {
         else { // or we using a fall back (item => is an id)
             url = API.url +"players/" +item
         }
-
-        console.log("I should call: " +url);
 
         var req = {
             method: 'GET',
@@ -58,7 +59,7 @@ function PlayerResource($http, API) {
     };
 
     o.create = function(params) {
-
+        // to be
     };
 
     return o;
