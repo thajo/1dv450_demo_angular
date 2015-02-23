@@ -1,10 +1,22 @@
-<h3>List all players</h3>
-
-<ul>
-  <!-- Using player when I have set the controllerAs in the app.js and routeProvider -->
-  <li data-ng-repeat="_player in players.playerList">
-    Name: {{ _player.name }} Age: {{_player.age}} Team: {{_player.teaminfo.teamname}}<a data-ng-href="player/{{_player.id}}">More info</a>
-  </li>
+<div class="container">
+  <h3>List all players</h3>
+  <div class="col-md-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Team</th>
+        </tr>
+        <tr data-ng-repeat="_player in players.playerList">
+          <td>{{ _player.name }}</td>
+          <td>{{_player.age}}</td>
+          <td>{{_player.team_info.teamname}}</td>
+          <td><a data-ng-href="player/{{_player.id}}">More info</a></td>
+        </tr>
+      </thead>
+     </table>
+  </div>
  
-</ul> 
+</div>
 

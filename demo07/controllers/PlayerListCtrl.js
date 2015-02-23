@@ -1,6 +1,6 @@
 // register the controller to the module
 angular
-  .module("demo5App")
+  .module("demo7App")
   .controller("PlayerListController", PlayerListController); // registrera med namn, funktion
 
 // inject the service

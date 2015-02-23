@@ -21,35 +21,52 @@
    <body>
      
      <h1 class="jumbotrone">Hello AngularJS - Demo6!</h1>
-     <p>
-       Du kan komma åt alla GET metoder men för att kunna skapa, editer och tabort behöver du logga in
+     <p class="container">
+       Du kan komma åt alla GET metoder endast med API-nyckel men för att kunna skapa, editera och ta bort behöver du logga in
+       (I mitt api med hjälp av en API-token)
      </p>
      
      
      <hr />
-     <div data-ng-controller="ExampleController as user">
-       
-       <p style="color: green" data-ng-show="user.isLoggedIn">Du är inloggad</p>
-       <p style="color: red" data-ng-show="!user.isLoggedIn">Du är inte inloggad</p>
-       
-       <h3>Alla lagen</h3>
-       <ul>
-         <li data-ng-repeat="team in user.teams"> {{team.name}} : <button ng-show="user.isLoggedIn" type="button" ng-click="user.removeTeam(team.id)">Remove Team</button>
-          
-       </ul>
+      <div class="col-md-4" data-ng-controller="TeamController as teamctrl">
+
+         <p class="alert alert-success" data-ng-show="$root.isLoggedIn">Du är inloggad</p>
+         <p class="alert alert-danger" data-ng-show="!$root.isLoggedIn">Du är inte inloggad</p>
+         <h3>Alla lagen</h3>
+         <table class=" table table-condensed table-striped">
+           <thead>
+             <tr>
+               <th>Name</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tr data-ng-repeat="team in teamctrl.teams"> 
+             <td>{{team.name}}</td> 
+             <td><button ng-show="$root.isLoggedIn" type="button" ng-click="teamctrl.removeTeam(team.id)">Remove Team</button></td>
+           </tr>
+
+         </table>
+       </div>
        
        <hr />
-       
-         <form novalidate name="user.form" class="simple-form">
-           E-mail: <br />
-           <input type="email" ng-model="user.email"/><br />
-           Password: <br />
-           <input type="password" ng-model="user.password"/>
-           <button data-ng-click="user.login(user.form)">Logga in</button>
-        </form>
-       
-       <h4>En lyckad inloggning ger dig en token du kan använda när du gör operationer som kräver inloggning</h4>
-       <p>Token: {{user.token}}</p>
+        <div class="col-md-4" data-ng-controller="LoginController as user">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Logga in</h3>
+            </div>
+            <div class="panel-body">
+               <form novalidate name="user.form" class="simple-form">
+                 E-mail: <br />
+                 <input type="email" ng-model="user.email"/><br />
+                 Password: <br />
+                 <input type="password" ng-model="user.password"/>
+                 <button data-ng-click="user.login(user.form)">Logga in</button>
+               </form>
+
+               <h4>En lyckad inloggning ger dig en token du kan använda när du gör operationer som kräver inloggning</h4>
+               <p>Token: {{$root.token}}</p>
+            </div>
+         </div>
        
      </div>
        

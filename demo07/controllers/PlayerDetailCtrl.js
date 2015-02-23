@@ -1,6 +1,10 @@
+/*
+This is the controller that handles the PlayerDetails
+*/
+
 // register the controller in the module (see ng-app in index.html)
 angular
-  .module("demo5App")
+  .module("demo7App")
   .controller("PlayerDetailController", PlayerDetailController);
 
 // Dependency injections, routeParams give us the /:id

@@ -1,5 +1,5 @@
 angular
-  .module("demo5App", ['ngRoute', 'LocalStorageModule']) // you must inject the ngRoute (included as a separate js-file)
+  .module("demo7App", ['ngRoute', 'LocalStorageModule']) // you must inject the ngRoute (included as a separate js-file)
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider.
@@ -16,16 +16,16 @@ angular
           controller: 'PlayerDetailController',
           controllerAs: 'player'
         }).
+        when('/teams', {
+          templateUrl: 'partials/team-list.html',
+          controller: 'TeamListController',
+          controllerAs: 'teams' // teams could be seen as an instance of the controller, use it in the view!
+        }).
         otherwise({
           redirectTo: '/'
         });
       
-      //$locationProvider.html5Mode(true); // This removes the hash-bang and use the Session history management >= IE10
-
-      $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: true
-      });
+      $locationProvider.html5Mode(true); // This removes the hash-bang and use the Session history management >= IE10
     }])
     .config(function (localStorageServiceProvider) {
       localStorageServiceProvider
@@ -39,7 +39,8 @@ angular
       'format': 'application/json'
     })
     .constant('LocalStorageConstants', {
-      'playersKey' : 'p'
+      'playersKey' : 'p',
+      'teamsKey'   : 't'
     });
 
 

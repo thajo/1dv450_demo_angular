@@ -1,6 +1,6 @@
 // This should hold a list with all players
 angular
-  .module("demo5App")
+  .module("demo7App")
   .factory('PlayerService', PlayerService); // register the recipe for teh service
 
   // We need PlayerResource for calling the API
@@ -26,7 +26,7 @@ angular
         if(!items) {
           
           // make the call to the api - Get all returns a promise and success will be called if $http succeed
-          Player.getAll().then(function(data){
+          Player.getCollection().then(function(data){
 
             
             // set the data in LS
@@ -88,7 +88,6 @@ angular
         // When the call has been made and everything is good (indepentet from how we call the API)
         promise.success(function(data){
 
-          console.log(data);
           // set the single player in the LS (could have a lot more information than the representation in the list) 
           var localStorageKey = LS.playersKey +"." +data.id
           localStorage.set(localStorageKey, data);

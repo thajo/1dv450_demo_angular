@@ -3,7 +3,7 @@ This is responsible of the calls to the API
 */
 
 angular
-    .module("demo5App")
+    .module("demo7App")
     .factory('ResourceService', ResourceService); // register the recipe for the service
 
 
@@ -19,9 +19,9 @@ function ResourceService($http, API) {
       angular.extend(this, data);
     }
   
-    var o = {};
+    
     // Get all players from the API
-    Resource.getAll = function() {
+    Resource.getCollection = function() {
         var req = {
             method: 'GET',
             url: API.url +collectionName, // this is the entry point in my example
@@ -94,7 +94,8 @@ function ResourceService($http, API) {
             url: API.url +collectionName, // this is the entry point in my example
             headers: {
                 'Accept': API.format,
-                'X-APIKEY': API.key
+                'X-APIKEY': API.key,
+                'Authorization' : "hbhj6765g76g77rt7g9g6r56dvv"
             },
             params: {
                 'limit': '500'
