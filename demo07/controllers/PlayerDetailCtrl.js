@@ -17,8 +17,8 @@ function PlayerDetailController($routeParams, playerService) {
   var vm = this;
   
   // Calling our service - we get an promise back whitch will be resolved/rejected when the async phase is ready
-  var thePlayerPromise = playerService.getPlayer($routeParams.id);
-  thePlayerPromise.then(function(data){
+  var playerPromise = playerService.getPlayer($routeParams.id);
+  playerPromise.then(function(data){
     // everything is good!
     // Update the ViewModel
     vm.name = data.name;

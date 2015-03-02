@@ -1,5 +1,5 @@
 angular
-  .module("demo8App", ['ngMap ']) // you must inject the ngRoute (included as a separate js-file)
+  .module('demo7App', ['ngRoute', 'LocalStorageModule']) // you must inject the ngRoute (included as a separate js-file)
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider.

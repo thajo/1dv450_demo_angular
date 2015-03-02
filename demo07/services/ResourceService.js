@@ -74,7 +74,7 @@ function ResourceService($http, API) {
         else {
           return false;
         }
-        c
+ 
         var req = {
             method: 'GET',
             url: url,
