@@ -1,5 +1,5 @@
 angular
-  .module("demo7App", ['ngRoute', 'LocalStorageModule']) // you must inject the ngRoute (included as a separate js-file)
+  .module("demo8App", ['ngMap ']) // you must inject the ngRoute (included as a separate js-file)
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider.
@@ -28,20 +28,18 @@ angular
       $locationProvider.html5Mode(true); // This removes the hash-bang and use the Session history management >= IE10
     }])
     .config(function (localStorageServiceProvider) {
+      // The module give me some stuff to configure
       localStorageServiceProvider
-          .setPrefix('demo5app')
+          .setPrefix('demo7app')
           .setStorageType('sessionStorage')
           .setNotify(true, true)
     })
-    .constant('API', {
-      'key': "sdkjalsdjlasjdlkajsdljs",
-      'url': "http://blue-white-harbor-95-185765.euw1-2.nitrousbox.com/",
-      'format': 'application/json'
+    .constant('API', { // here I also can declare constants
+      'key': "sdkjalsdjlasjdlkajsdljs", // bad practice!? Key on client....
+      'url': "http://blue-white-harbor-95-185765.euw1-2.nitrousbox.com/", // base url
+      'format': 'application/json' // Default representation we want
     })
     .constant('LocalStorageConstants', {
-      'playersKey' : 'p',
+      'playersKey' : 'p', // just some keys for sessionStorage-keys
       'teamsKey'   : 't'
     });
-
-
-;

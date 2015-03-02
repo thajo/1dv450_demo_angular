@@ -10,9 +10,6 @@ function PlayerListController(playerService) {
  
   var vm = this;
 
- // playerService.savePlayer({});
-  
-  
   // call the service get a promise back
   var playerPromise = playerService.get();
 
@@ -25,6 +22,4 @@ function PlayerListController(playerService) {
       .catch(function(error) {
         console.log("ERROR");
       });
-
-  
 }

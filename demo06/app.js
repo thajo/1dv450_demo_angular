@@ -31,29 +31,32 @@ angular.module('demo6App', [])
     }
     // So we create a HTTP POST with the data
     var promise = $http.post(url, data, config);
-    
+    // I take care of it in same controller...
     promise.success(function(data, status, headers, config) {
-      
+      // Just check what we get back
       console.log(data);
       console.log(status);
       console.log(config)
       
       // if we succeeded we got a token - can be used to autenticate us
-      $rootScope.token = data.auth_token
+      $rootScope.token = data.auth_token.substring(0, 20) +"...";
       $rootScope.isLoggedIn = true;
       
+      
     });
-    
+    // Something went wrong...
     promise.error(function(data, status, headers, config) {
       console.log(data);
       console.log(status);
       console.log(config)
+      $rootScope.token = "No way, Jose!: " +data.error;
+      $rootScope.isLoggedIn = false;
     });
   };
   
   
 
-}).controller("TeamController", function($http) {
+}).controller("TeamController", function($http) { // This controller is handling the list with teams
   var vm = this;
   var getConfig = {
     headers: {
@@ -62,13 +65,17 @@ angular.module('demo6App', [])
     }
   }
   $http.get("http://blue-white-harbor-95-185765.euw1-2.nitrousbox.com/teams", getConfig).success(function(data) {
-    vm.teams = data.teams;
+    //console.log(data);
+    vm.teams = data;
   }).error(function(data, status) {
+    //console.log(data);
     vm.alert = data.error;
   });
   
+  // Havent implemented this (should try to do a DELETE and send the correct token )
+  // No need for more validation here since the server is checking the token
   vm.removeTeam = function(team) {
-    console.log(team);
+     console.log(team);
   };
   
 });

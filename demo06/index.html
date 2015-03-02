@@ -33,6 +33,7 @@
          <p class="alert alert-success" data-ng-show="$root.isLoggedIn">Du är inloggad</p>
          <p class="alert alert-danger" data-ng-show="!$root.isLoggedIn">Du är inte inloggad</p>
          <h3>Alla lagen</h3>
+        
          <table class=" table table-condensed table-striped">
            <thead>
              <tr>
@@ -60,7 +61,7 @@
                  <input type="email" ng-model="user.email"/><br />
                  Password: <br />
                  <input type="password" ng-model="user.password"/>
-                 <button data-ng-click="user.login(user.form)">Logga in</button>
+                 <button data-ng-click="user.login()">Logga in</button>
                </form>
 
                <h4>En lyckad inloggning ger dig en token du kan använda när du gör operationer som kräver inloggning</h4>

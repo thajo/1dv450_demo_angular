@@ -1,6 +1,18 @@
-<h1>Teams with players</h1>
-
-<ul>
-  <li data-ng-repeat="t in teams.teamsList">{{t.name}}</li>
-</ul>
-
+<div class="container">
+  <h3>Teams</h3>
+  <div class="col-md-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+        
+        </tr>
+        <tr data-ng-repeat="t in teams.teamsList">
+          <td>{{ t.name }}</td>
+      
+        </tr>
+      </thead>
+     </table>
+  </div>
+ 
+</div>

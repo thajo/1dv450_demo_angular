@@ -1,4 +1,7 @@
-// This should hold a list with all players
+/*
+This service is for handling the players in web storage
+We could read directly from localstorage or get it from the server via ResourceService
+*/
 angular
   .module("demo7App")
   .factory('PlayerService', PlayerService); // register the recipe for teh service
@@ -10,16 +13,16 @@ angular
   PlayerService.$inject = ['ResourceService', 'localStorageService', 'LocalStorageConstants', '$q'];
 
   // Here is the definition of teh service
-  function PlayerService(resourceService, localStorage, LS, $q) {
+  function PlayerService(Resource, LocalStorage, LS, $q) {
         
-    // Here we create the Object from the ResourceService
-    var Player = resourceService('players');
+    // Here we create the Object from the ResourceService - Just tell the resource name
+    var Player = Resource('players');
     return {
       get:function() {
-        // check if we have it in localstorage - Pretty clumpsy handling but just for example
-        var items = localStorage.get(LS.playersKey);
+        // check if we have it in localstorage - Pretty clumpsy handling so far but just for example
+        var items = LocalStorage.get(LS.playersKey);
 
-        // Define a promise...this will be used later
+        // Define a promise...this will be returned to caller to register on
         var deferred = $q.defer();
 
         // If we dont have stuff in localstorage we get it from the API (should maybe have som timestamp for stale problems)
@@ -27,41 +30,29 @@ angular
           
           // make the call to the api - Get all returns a promise and success will be called if $http succeed
           Player.getCollection().then(function(data){
-
-            
-            // set the data in LS
-            localStorage.set(LS.playersKey, data);
-           
-
+            // set the data in LS - Just dump it
+            LocalStorage.set(LS.playersKey, data);
             // resolve the data to the caller - They have a promise and now we deliver the response
             deferred.resolve(data);
-
           });
-
         }
         else {
           console.log("Getting all the players from the cache");
-         // var deferred = $q.defer();
           deferred.resolve(items);
-          //return deferred.promise;
         }
-
         // return the promise to the caller
         return deferred.promise;
       },
       
       // This gets an single player
       getPlayer:function(id) {
-
         // get the specific player in sessionStorage (we have save all in a bigg array)
-        var items = localStorage.get(LS.playersKey);
-
+        var items = LocalStorage.get(LS.playersKey);
         var item = false;
 
         // check if we have the one with the id in web storage
         if(items) {
           items.forEach(function(obj, index){
-
             if(obj.id.toString() === id) {
               item = obj; // update item and return
               return true;
@@ -90,7 +81,7 @@ angular
 
           // set the single player in the LS (could have a lot more information than the representation in the list) 
           var localStorageKey = LS.playersKey +"." +data.id
-          localStorage.set(localStorageKey, data);
+          LocalStorage.set(localStorageKey, data);
 
           // resolve the data to the caller
           deferred.resolve(data);
@@ -106,11 +97,11 @@ angular
       savePlayer:function(data) {
         
         data = { "player":
-                {
-                    "name": "From AngularJS",
-                    "age": 12,
-                    "team_id" : 1
-                }
+                  {
+                      "name": "From AngularJS",
+                      "age": 12,
+                      "team_id" : 1
+                  }
               }
         var promise = Player.save('players', data).then(function(data) {
           console.log(data);

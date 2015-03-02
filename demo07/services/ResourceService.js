@@ -1,27 +1,30 @@
 /**
-This is responsible of the calls to the API
+This is responsible of the calls to the API 
+We could try to build it så every REST resource fits in it
+teams, players, whatever
+Should have all the CRUD stuff
 */
-
 angular
     .module("demo7App")
     .factory('ResourceService', ResourceService); // register the recipe for the service
 
-
 // We inject the http (for AJAX-handling) and the API
-//PlayerResource.$inject = ['$http', 'API'];
-
+ResourceService.$inject = ['$http', 'API'];
 
 function ResourceService($http, API) {
-  
+
+ // Returns the Service - Get the collectionName as parameter 
  return function (collectionName) {
+  
+   // Creates a intern Resource-object that is filled with data (depending on what the server gets us)
     var Resource = function(data) {
       // Configuerar objectet enligt den data som kommer in - Allt är json
       angular.extend(this, data);
     }
-  
-    
+      
     // Get all players from the API
     Resource.getCollection = function() {
+        // Ordinaiery http-call
         var req = {
             method: 'GET',
             url: API.url +collectionName, // this is the entry point in my example
@@ -30,12 +33,13 @@ function ResourceService($http, API) {
                 'X-APIKEY': API.key
             },
             params: {
-                'limit': '500'
+                'limit': '20'
             }
         };
         // This returns a promise which will be fullfilled when the response is back
         return $http(req).then(function(response) {
           var result = [];
+          // Building up an array with resource objects that will be returned
           angular.forEach(response.data, function(value, key) {
             result[key] = new Resource(value); 
           });
@@ -59,7 +63,8 @@ function ResourceService($http, API) {
 
         var url;
         console.log(resourceInfo);
-        // are we using the url provided by the call
+        // OK this is maybe a clumpsy way to do this and shows a problem with REST and HATEOAS  
+        // are we using the url provided by the call- The HATEOAS way
         if(resourceInfo.hasOwnProperty('url')) {
             url = resourceInfo.url;
         }
@@ -69,7 +74,7 @@ function ResourceService($http, API) {
         else {
           return false;
         }
-      console.log("Calling: " +url);
+        c
         var req = {
             method: 'GET',
             url: url,
@@ -81,11 +86,11 @@ function ResourceService($http, API) {
                 'limit': '500'
             }
         };
-
-      return $http(req).success(function(response) {
-        
-        return response;
-      });
+        // return the promise
+        return $http(req).success(function(response) {
+          // This eluvated as resolve/reject depending on the status code.
+          return response;
+        });
     };
 
     Resource.save = function(collectionName, data) {
@@ -100,14 +105,14 @@ function ResourceService($http, API) {
             params: {
                 'limit': '500'
             },
-          data : data
-        };
-        return $http(req).then(function(response){
-          return new Resource(data);
-        });
-    };
+            data : data
+          };
+          return $http(req).then(function(response){
+            return new Resource(data);
+          });
+      };
 
-    return Resource;
+      return Resource;
  }
 
 };

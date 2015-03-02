@@ -27,34 +27,33 @@
        var factory = {};
 
        /**
-        * En metod som simulerar ett asynkront anrop
+        * Simulate an async operation
         * @returns {promise|*}
         */
        factory.doA= function() {
        		console.log("doA called");
             var task = $q.defer();
 
-            // Simulerar ett anrop
+            // Do an timeout for simulationg an operation
             $timeout(function() {
-                // Simulerar data vi fått tillbaka
+                // This is just a flag for testing
                 var someFlag =  true;
                 if(someFlag) {
-                	console.log("doA resolved");
-                    task.resolve();
+                  console.log("doA resolved");
+                  task.resolve();
                 }
                 else {
                 	console.log("doA rejected");
-                    task.reject("Det blev fel i doA");
+                  task.reject("Det blev fel i doA");
                 }
-            }, 1000);
+            }, 1000); // wait 1 sek
             // returnerar promises
             console.log("doA returned a promise");
             return task.promise;
         };
 
        /**
-        * Simulerar ett mer synkront anrop, måste ske efter det
-        * asynkrona anropet getID
+        * Simulate another async operation
         * @param id
         * @returns {string}
         */
@@ -63,18 +62,18 @@
        		console.log("doB Called");
        		 var task = $q.defer();
        		 $timeout(function() {
-       		 	var someFlag = true;
-       		 	if(someFlag) {
-       		 		console.log("doB resolved");
-                    task.resolve("Hurra! Här kommer det data!!!");
-                }
-                else {
-                	console.log("doB rejected");
-                    task.reject("Det blev fel i doB");
-                }
+              var someFlag = false;
+              if(someFlag) {
+                console.log("doB resolved");
+                task.resolve("Hurra! Här kommer det data!!!");
+              }
+              else {
+                console.log("doB rejected");
+                task.reject("Det blev fel i doB");
+              }
             }, 1000);
             // Just to see
-            //return "Should have got data for id: " +obj.id;
+       
             console.log("doB returned a promise");
             return task.promise;
        }
