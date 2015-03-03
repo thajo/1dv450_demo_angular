@@ -108,7 +108,7 @@ function ResourceService($http, API) {
             data : data
           };
           return $http(req).then(function(response){
-            return new Resource(data);
+            return new Resource(response.data);
           });
       };
 
